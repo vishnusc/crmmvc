@@ -9,4 +9,5 @@ public interface CrmService {
 	
 	boolean addFeedback(Feedback feedback);
 
+	Customer findCustomer(long mno);
 }

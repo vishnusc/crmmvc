@@ -2,6 +2,8 @@ package com.cruds.crmmvc.controller;
 
 import java.util.List;
 import javax.validation.Valid;
+
+import org.jboss.logging.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -98,17 +100,19 @@ public class AppController {
 
 	@RequestMapping(value = { "/searchcustomer"}, method = RequestMethod.GET)
 	public String getsearchPage() {
-		System.out.println("Login Successful");
+		System.out.println("Search page ");
 		return "searchcustomer";
 	}
 
 	@RequestMapping(value = { "/searchcustomer"}, method = RequestMethod.POST)
-	public String postsearchPage() {
-		System.out.println("Search Successful");
-		return "customerdetails";
+	public String postsearchPage(@RequestParam("mno") long mno, ModelMap model ) {
+		System.out.println("Search page seached ");
+		System.out.println("Search " + mno);
+		Customer customer = crmservice.findCustomer(mno);
+		System.out.println("Customer details : " + customer);
+		//model.addAttribute("customer", customer);
+		return "searchcustomer";
 	}
-	
-	
 	
 	@RequestMapping(value = { "/customerdetails"}, method = RequestMethod.GET)
 	public String getnewcustomerPage() {
