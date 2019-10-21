@@ -38,8 +38,8 @@ public class CrmServiceImpl implements CrmService {
 	}
 
 	@Override
-	public Customer findCustomer(long mno) {
-		return sdao.findCustomer(mno);
+	public Customer findCustomer(long mobile) {
+		return sdao.findCustomer(mobile);
 	}
 
 }

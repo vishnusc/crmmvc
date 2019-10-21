@@ -9,5 +9,5 @@ public interface CrmService {
 	
 	boolean addFeedback(Feedback feedback);
 
-	Customer findCustomer(long mno);
+	Customer findCustomer(long mobile);
 }

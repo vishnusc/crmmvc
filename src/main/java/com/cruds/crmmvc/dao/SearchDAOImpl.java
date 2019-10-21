@@ -12,10 +12,9 @@ import com.cruds.crmmvc.model.Customer;
 public class SearchDAOImpl extends AbstractDao<Integer, Customer> implements SearchDAO{
 
 	@Override
-	public Customer findCustomer(long mno) {
+	public Customer findCustomer(long mobile) {
 		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.eq("customer_mobile", mno));
-		
+		criteria.add(Restrictions.eq("mobile", mobile));
 		return (Customer) criteria.uniqueResult();
 	}
 

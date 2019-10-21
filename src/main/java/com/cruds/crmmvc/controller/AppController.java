@@ -105,12 +105,12 @@ public class AppController {
 	}
 
 	@RequestMapping(value = { "/searchcustomer"}, method = RequestMethod.POST)
-	public String postsearchPage(@RequestParam("mno") long mno, ModelMap model ) {
+	public String postsearchPage(@RequestParam("mobile") long mobile, ModelMap model ) {
 		System.out.println("Search page seached ");
-		System.out.println("Search " + mno);
-		Customer customer = crmservice.findCustomer(mno);
+		System.out.println("Search " + mobile);
+		Customer customer = crmservice.findCustomer(mobile);
 		System.out.println("Customer details : " + customer);
-		//model.addAttribute("customer", customer);
+		model.addAttribute("customer", customer);
 		return "searchcustomer";
 	}
 	

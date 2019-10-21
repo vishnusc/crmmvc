@@ -15,7 +15,7 @@
 <h1>Search Customer Page</h1><hr/>
 <table cellpadding="6px">
 <tr><td>Enter Mobile No:</td>
-	<td><input name="mno"  type="text"/>
+	<td><input name="mobile"  type="text"/>
 </tr>
 <tr><td><input type="submit" value="Search"/></td></tr>
 </table>
@@ -25,10 +25,10 @@
 		<tr>
 			<td>NAME:</td><td>Phome:</td>
 		</tr>
-		<c:forEach items="${customer}" var="customer">
+		<c:forEach items="${customer}" var="cs">
 			<tr>
-			<td>${customer.name}</td>
-			<td>${customer.mobile}</td>
+			<td>${cs.name}</td>
+			<td>${cs.mobile}</td>
 			</tr>
 		</c:forEach>
 	</table>
