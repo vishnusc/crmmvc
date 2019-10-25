@@ -6,9 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cruds.crmmvc.dao.CustomerDAO;
 import com.cruds.crmmvc.dao.FeedbackDAO;
+import com.cruds.crmmvc.dao.PointsDAO;
 import com.cruds.crmmvc.dao.SearchDAO;
 import com.cruds.crmmvc.model.Customer;
 import com.cruds.crmmvc.model.Feedback;
+import com.cruds.crmmvc.model.Points;
 
 @Service("crmservice")
 @Transactional
@@ -22,6 +24,9 @@ public class CrmServiceImpl implements CrmService {
 	
 	@Autowired
 	SearchDAO sdao;
+	
+	@Autowired
+	PointsDAO pdao;
 	
 	@Override
 	public boolean addCustomer(Customer customer) {
@@ -40,6 +45,18 @@ public class CrmServiceImpl implements CrmService {
 	@Override
 	public Customer findCustomer(long mobile) {
 		return sdao.findCustomer(mobile);
+	}
+
+	@Override
+	public boolean updateCustomer(Customer customer) {
+		cdao.updateCustomer(customer);
+		return true;
+	}
+
+	@Override
+	public boolean addPoints(Points points) {
+		pdao.addPoints(points);
+		return true;
 	}
 
 }

@@ -4,11 +4,13 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,11 +21,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
+
+
 @Entity
 @Table(name="customer")
 public class Customer {
 	
-	@Id
+	@Id  
 	@GeneratedValue
 	@Column(name = "customer_id")
 	private int id;
@@ -32,8 +36,8 @@ public class Customer {
 	@Column(name = "customer_name")
 	private String name;
 	
-
-	@Column(name = "customer_mobile", unique=true)
+	
+	@Column(name = "customer_mobile",unique=true)
 	private long mobile;
 	
 	@Column(name = "customer_dob")
@@ -58,6 +62,12 @@ public class Customer {
 
 	@Column(name = "customer_vdate")
 	private Date vdate;
+	
+	@OneToMany(targetEntity=Visits.class,cascade = CascadeType.ALL,mappedBy="customer")
+    private List<Visits> listVisits = new ArrayList<>();
+	
+	@OneToMany(targetEntity=Points.class,cascade = CascadeType.ALL,mappedBy="customer")
+    private List<Points> listPoints = new ArrayList<>();
 	
 	public Customer() {
 	
@@ -155,6 +165,23 @@ public class Customer {
 
 	public void setVdate(Date vdate) {
 		this.vdate = vdate;
+	}
+
+	
+	public List<Visits> getListVisits() {
+		return listVisits;
+	}
+
+	public void setListVisits(List<Visits> listVisits) {
+		this.listVisits = listVisits;
+	}
+
+	public List<Points> getListPoints() {
+		return listPoints;
+	}
+
+	public void setListPoints(List<Points> listPoints) {
+		this.listPoints = listPoints;
 	}
 
 	@Override

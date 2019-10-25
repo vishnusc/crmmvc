@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cruds.crmmvc.model.Customer;
 import com.cruds.crmmvc.model.Feedback;
+import com.cruds.crmmvc.model.Points;
 import com.cruds.crmmvc.services.CrmService;
 import com.google.gson.Gson;
 
@@ -65,8 +66,12 @@ public class AppController {
 	@RequestMapping(value = { "/newcustomer"}, method = RequestMethod.POST)
 	public String saveCustomerPage(@Valid Customer customer1, BindingResult rs, ModelMap model) {
 		
+		Customer c= new Customer();
+		Points p = new Points();
 		
+		p.setTpoint(20);
 		crmservice.addCustomer(customer1);
+		crmservice.addPoints(p);
 		Customer customer= new Customer();
 		model.addAttribute("newcustomer",customer);
 		System.out.println(customer1);
@@ -109,9 +114,33 @@ public class AppController {
 		System.out.println("Search page seached ");
 		System.out.println("Search " + mobile);
 		Customer customer = crmservice.findCustomer(mobile);
+		if(customer==null){
+			model.addAttribute("view1", true);
+		}else{
 		System.out.println("Customer details : " + customer);
 		model.addAttribute("customer", customer);
+		model.addAttribute("view", true);
+		
+		}
 		return "searchcustomer";
+	}
+	
+	@RequestMapping(value = {"/edit-{mobile}-customer"}, method = RequestMethod.GET)
+	public String editCustomer(@PathVariable long mobile, ModelMap model){
+		System.out.println("Edit page ");
+		Customer customer = crmservice.findCustomer(mobile);
+		model.addAttribute("newcustomer", customer);
+		model.addAttribute("edit", true);
+		return "newcustomer";
+	}
+	
+	@RequestMapping(value = {"/edit-{mobile}-customer"}, method = RequestMethod.POST)
+	public String updateCustomer(@Valid Customer customer1, BindingResult rs, ModelMap model){
+		System.out.println("update page ");
+		crmservice.updateCustomer(customer1);
+		Customer customer= new Customer();
+		model.addAttribute("newcustomer",customer);
+		return "newcustomer";
 	}
 	
 	@RequestMapping(value = { "/customerdetails"}, method = RequestMethod.GET)

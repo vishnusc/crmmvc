@@ -33,6 +33,9 @@ private final Class<T> persistentClass;
 		getSession().persist(entity);
 	}
 
+	 public void update(T entity) {
+	        getSession().saveOrUpdate(entity);
+	    }
 	public void delete(T entity) {
 		getSession().delete(entity);
 	}

@@ -16,4 +16,10 @@ public class CustomerDAOImpl extends AbstractDao<Integer, Customer> implements C
 		return true;
 	}
 
+	@Override
+	public boolean updateCustomer(Customer customer) {
+		update(customer);
+		return true;
+	}
+
 }
